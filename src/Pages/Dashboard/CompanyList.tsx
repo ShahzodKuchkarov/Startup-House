@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Input, Table } from "antd";
 import Title from "components/title";
 import Axios from "utils/axios";
+import companyReducer from "store/reducers";
+import { addCompany } from "store/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 interface Company {
   "1. symbol": string;
@@ -18,6 +21,8 @@ interface Company {
 const CompanyList = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [selectedCompanies, setSelectedCompanies] = useState<Company[]>([]);
+  const dispatch = useDispatch();
+
   const columns = [
     {
       title: "Company Name",
@@ -44,6 +49,7 @@ const CompanyList = () => {
     ).then((res) => {
       const { bestMatches } = res.data;
       setCompanies(bestMatches);
+      dispatch(addCompany(companies));
     });
   };
   const onSelect = (company: Company) => {
