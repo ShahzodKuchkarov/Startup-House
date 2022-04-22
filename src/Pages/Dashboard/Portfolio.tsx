@@ -5,10 +5,8 @@ import { ICompany } from "./companies";
 import { removeCompanyFromPortfolio } from "store/actions";
 import { PortfolioStyle } from "Styles/Portfolio";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 const Portfolio = () => {
-  const [isTableShowed, setIsTableShowed] = useState<boolean>(false);
   const companiesInPortfolio = useAppSelector(
     (state) => state.companiesInPortfolio
   );
@@ -49,25 +47,16 @@ const Portfolio = () => {
     },
   ];
 
-  const toggleTable = () => {
-    setIsTableShowed((prev) => !prev);
-  };
-
   return (
     <PortfolioStyle>
       <div className="portfolio">
         <Text text="Your portfolio" />
       </div>
-      <div className={`protfolio__table ${isTableShowed && "show"}`}>
-        <button className="portfolio__btn" onClick={toggleTable}>
-          {isTableShowed ? "Hide" : "Show"} portfolio
-        </button>
-        <Table
-          dataSource={companiesInPortfolio}
-          columns={tableColumns}
-          bordered
-        />
-      </div>
+      <Table
+        dataSource={companiesInPortfolio}
+        columns={tableColumns}
+        bordered
+      />
     </PortfolioStyle>
   );
 };
