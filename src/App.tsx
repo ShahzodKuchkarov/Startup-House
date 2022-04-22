@@ -1,11 +1,18 @@
 import React from "react";
-import "antd/dist/antd.css";
 import Dashboard from "./Pages/Dashboard";
+import { Route, Link, Routes } from "react-router-dom";
+import "Styles/global.css";
+import CompanyDetails from "Pages/CompanyDetails";
+import NotFound from "Pages/NotFound";
 
 function App() {
   return (
-    <div className="App">
-      <Dashboard />
+    <div className="container">
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path=":companySymbol" element={<CompanyDetails />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
